@@ -299,15 +299,15 @@ kbd {
 }
 
 body.preview-desktop .compare-area {
-    align-items: flex-start;
-    justify-content: flex-start;
+    align-items: stretch;
+    justify-content: center;
     gap: 20px;
     padding: 20px;
-    overflow: auto;
+    overflow: hidden;
 }
 
 body.preview-desktop .phone-wrapper {
-    flex: 0 0 clamp(720px, calc((100vw - 140px) / 2), 980px);
+    flex: 1;
     max-width: none;
     align-items: stretch;
     gap: 10px;
@@ -318,9 +318,9 @@ body.preview-desktop .phone-title {
 }
 
 body.preview-desktop .phone-frame {
-    flex: 0 0 auto;
-    height: min(76vh, 820px);
-    border-radius: 18px;
+    flex: 1;
+    height: auto;
+    border-radius: 8px;
     border: 1px solid var(--border);
     background: #0f1117;
     box-shadow:
