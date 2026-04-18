@@ -52,6 +52,7 @@
             font-weight: 700;
             background: linear-gradient(135deg, #7c6cf0, #b4adff);
             -webkit-background-clip: text;
+            background-clip: text;
             -webkit-text-fill-color: transparent;
             white-space: nowrap;
             flex-shrink: 0;
@@ -197,7 +198,7 @@
             align-items: stretch;
             justify-content: center;
             gap: 24px;
-            padding: 16px 16px;
+            padding: 16px;
             overflow: hidden;
             background:
                 radial-gradient(ellipse at 30% 50%, rgba(124, 108, 240, .05) 0%, transparent 50%),
@@ -283,6 +284,64 @@
             border-radius: 2px;
         }
 
+        /* ===== WELCOME SCREEN ===== */
+        .welcome {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            gap: 20px;
+            padding: 40px;
+            background:
+                radial-gradient(ellipse at 50% 50%, rgba(124, 108, 240, .06) 0%, transparent 60%);
+        }
+
+        .welcome.hidden {
+            display: none;
+        }
+
+        .welcome-icon {
+            font-size: 56px;
+            opacity: .7;
+        }
+
+        .welcome-title {
+            font-size: 20px;
+            font-weight: 700;
+            background: linear-gradient(135deg, #7c6cf0, #b4adff);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .welcome-desc {
+            color: var(--text-dim);
+            font-size: 13px;
+            text-align: center;
+            line-height: 1.7;
+            max-width: 400px;
+        }
+
+        .welcome-btn {
+            background: var(--accent);
+            color: #fff;
+            border: none;
+            padding: 10px 28px;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 600;
+            font-family: inherit;
+            cursor: pointer;
+            transition: all .2s;
+            box-shadow: 0 4px 16px rgba(124, 108, 240, .35);
+        }
+
+        .welcome-btn:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 6px 24px rgba(124, 108, 240, .5);
+        }
+
         /* ===== SIDEBAR ===== */
         .overlay {
             position: fixed;
@@ -302,8 +361,8 @@
         .sidebar {
             position: fixed;
             top: 0;
-            right: -380px;
-            width: 380px;
+            right: -400px;
+            width: 400px;
             height: 100vh;
             background: var(--surface);
             border-left: 1px solid var(--border);
@@ -341,6 +400,59 @@
 
         .sb-close:hover {
             color: var(--text);
+        }
+
+        /* Import section in sidebar */
+        .sb-import {
+            padding: 12px 14px;
+            border-bottom: 1px solid var(--border);
+            flex-shrink: 0;
+        }
+
+        .sb-import-row {
+            display: flex;
+            gap: 6px;
+            margin-bottom: 8px;
+        }
+
+        .sb-import-btn {
+            flex: 1;
+            background: var(--surface2);
+            border: 1px solid var(--border);
+            color: var(--text);
+            padding: 7px 0;
+            border-radius: 6px;
+            font-size: 12px;
+            font-weight: 500;
+            font-family: inherit;
+            cursor: pointer;
+            transition: all .2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 4px;
+        }
+
+        .sb-import-btn:hover {
+            background: var(--accent);
+            border-color: var(--accent);
+        }
+
+        .sb-import-btn.danger {
+            border-color: rgba(255, 100, 100, .3);
+            color: #ff8080;
+        }
+
+        .sb-import-btn.danger:hover {
+            background: #c0392b;
+            border-color: #c0392b;
+            color: #fff;
+        }
+
+        .sb-import-hint {
+            font-size: 10px;
+            color: var(--text-dim);
+            line-height: 1.5;
         }
 
         .sb-list {
@@ -392,6 +504,20 @@
             color: #fdcb6e;
         }
 
+        .sb-empty {
+            padding: 30px 16px;
+            text-align: center;
+            color: var(--text-dim);
+            font-size: 12px;
+            line-height: 1.8;
+        }
+
+        .sb-empty-icon {
+            font-size: 28px;
+            margin-bottom: 8px;
+            opacity: .5;
+        }
+
         .fab {
             position: fixed;
             bottom: 16px;
@@ -413,41 +539,144 @@
             transform: scale(1.1);
         }
 
-        /* ===== Loading ===== */
-        .loading-overlay {
+        /* ===== Import Modal ===== */
+        .modal-overlay {
             position: fixed;
             inset: 0;
-            background: var(--bg);
-            display: flex;
+            background: rgba(0, 0, 0, .6);
+            z-index: 200;
+            display: none;
             align-items: center;
             justify-content: center;
-            z-index: 200;
+            padding: 20px;
+        }
+
+        .modal-overlay.open {
+            display: flex;
+        }
+
+        .modal {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            width: 100%;
+            max-width: 600px;
+            max-height: 80vh;
+            display: flex;
             flex-direction: column;
-            gap: 12px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, .5);
         }
 
-        .loading-overlay.hidden {
-            display: none;
+        .modal-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 14px 18px;
+            border-bottom: 1px solid var(--border);
         }
 
-        .spinner {
-            width: 32px;
-            height: 32px;
-            border: 3px solid var(--border);
-            border-top-color: var(--accent);
-            border-radius: 50%;
-            animation: spin .8s linear infinite;
+        .modal-header h3 {
+            font-size: 15px;
+            font-weight: 600;
         }
 
-        @keyframes spin {
-            to {
-                transform: rotate(360deg);
-            }
-        }
-
-        .loading-text {
+        .modal-close {
+            background: none;
+            border: none;
             color: var(--text-dim);
+            font-size: 22px;
+            cursor: pointer;
+        }
+
+        .modal-close:hover {
+            color: var(--text);
+        }
+
+        .modal-body {
+            padding: 16px 18px;
+            flex: 1;
+            overflow-y: auto;
+        }
+
+        .modal-body label {
+            display: block;
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--text-dim);
+            margin-bottom: 6px;
+        }
+
+        .modal-body textarea {
+            width: 100%;
+            height: 260px;
+            background: var(--bg);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            color: var(--text);
+            font-family: 'Consolas', 'Monaco', monospace;
+            font-size: 11px;
+            padding: 10px;
+            resize: vertical;
+            line-height: 1.6;
+        }
+
+        .modal-body textarea:focus {
+            outline: none;
+            border-color: var(--accent);
+        }
+
+        .modal-body textarea::placeholder {
+            color: var(--text-dim);
+            opacity: .6;
+        }
+
+        .modal-hint {
+            font-size: 10px;
+            color: var(--text-dim);
+            margin-top: 8px;
+            line-height: 1.6;
+        }
+
+        .modal-hint code {
+            background: var(--surface2);
+            padding: 1px 5px;
+            border-radius: 3px;
+            font-size: 10px;
+        }
+
+        .modal-footer {
+            display: flex;
+            justify-content: flex-end;
+            gap: 8px;
+            padding: 12px 18px;
+            border-top: 1px solid var(--border);
+        }
+
+        .modal-footer .btn-primary {
+            background: var(--accent);
+            border: none;
+            color: #fff;
+            padding: 7px 20px;
+            border-radius: 6px;
             font-size: 13px;
+            font-weight: 600;
+            font-family: inherit;
+            cursor: pointer;
+            transition: all .2s;
+        }
+
+        .modal-footer .btn-primary:hover {
+            background: #6a5bd4;
+        }
+
+        .modal-footer .btn-primary:disabled {
+            opacity: .4;
+            cursor: not-allowed;
+        }
+
+        /* Hidden file input */
+        #fileInput {
+            display: none;
         }
 
         /* ===== Scrollbar ===== */
@@ -468,29 +697,24 @@
 
 <body>
 
-    <div class="loading-overlay" id="loading">
-        <div class="spinner"></div>
-        <div class="loading-text">加载数据中...</div>
-    </div>
-
     <!-- Header -->
     <div class="header">
         <div class="logo">📱 页面对比</div>
-        <div class="nav-group">
+        <div class="nav-group" id="navGroup" style="display:none">
             <button class="btn" id="prevBtn" onclick="go(-1)">◀ 上一组</button>
             <div class="counter"><span class="cur" id="curNum">0</span> / <span id="totalNum">0</span></div>
             <button class="btn" id="nextBtn" onclick="go(1)">下一组 ▶</button>
         </div>
         <div class="spacer"></div>
-        <div class="kbd-hints">
+        <div class="kbd-hints" id="kbdHints" style="display:none">
             <span><kbd>←</kbd> <kbd>→</kbd> 切换</span>
             <span><kbd>L</kbd> 列表</span>
         </div>
-        <button class="btn" onclick="toggleSidebar()">☰ 列表</button>
+        <button class="btn" onclick="toggleSidebar()">☰ 菜单</button>
     </div>
 
-    <!-- URL Bar -->
-    <div class="url-bar">
+    <!-- URL Bar (hidden until data loaded) -->
+    <div class="url-bar" id="urlBar" style="display:none">
         <div class="url-item">
             <span class="url-label src">源站</span>
             <a id="srcLink" href="#" target="_blank"></a>
@@ -503,8 +727,19 @@
         <span class="time-stamp" id="timeTag"></span>
     </div>
 
-    <!-- Phone Frames -->
-    <div class="compare-area">
+    <!-- Welcome Screen (shown when no data) -->
+    <div class="welcome" id="welcome">
+        <div class="welcome-icon">📱</div>
+        <div class="welcome-title">页面对比工具</div>
+        <div class="welcome-desc">
+            左右并排预览源站与复刻站的移动端效果<br>
+            点击下方按钮或右上角 ☰ 菜单导入数据
+        </div>
+        <button class="welcome-btn" onclick="openImportModal()">📂 导入数据</button>
+    </div>
+
+    <!-- Phone Frames (hidden until data loaded) -->
+    <div class="compare-area" id="compareArea" style="display:none">
         <div class="phone-wrapper">
             <div class="phone-title src">源站</div>
             <div class="phone-frame">
@@ -531,52 +766,219 @@
     <div class="overlay" id="overlay" onclick="toggleSidebar()"></div>
     <div class="sidebar" id="sidebar">
         <div class="sb-header">
-            <h3>📋 全部对比项</h3>
+            <h3>☰ 菜单</h3>
             <button class="sb-close" onclick="toggleSidebar()">✕</button>
         </div>
-        <div class="sb-list" id="sbList"></div>
+        <div class="sb-import">
+            <div class="sb-import-row">
+                <button class="sb-import-btn" onclick="openImportModal()">📋 粘贴导入</button>
+                <button class="sb-import-btn" onclick="triggerFileImport()">📂 文件导入</button>
+                <button class="sb-import-btn danger" id="clearBtn" onclick="clearData()" style="display:none">🗑
+                    清空</button>
+            </div>
+            <div class="sb-import-hint">支持格式：<code>[时间] 源站URL | 复刻URL</code></div>
+        </div>
+        <div class="sb-list" id="sbList">
+            <div class="sb-empty" id="sbEmpty">
+                <div class="sb-empty-icon">📭</div>
+                暂无数据<br>请通过上方按钮导入
+            </div>
+        </div>
     </div>
     <button class="fab" onclick="toggleSidebar()">☰</button>
+
+    <!-- Import Modal -->
+    <div class="modal-overlay" id="importModal">
+        <div class="modal">
+            <div class="modal-header">
+                <h3>📋 粘贴导入数据</h3>
+                <button class="modal-close" onclick="closeImportModal()">✕</button>
+            </div>
+            <div class="modal-body">
+                <label>将对比数据粘贴到下方：</label>
+                <textarea id="importTextarea" placeholder="https://example.com/page1 | https://your-site.com/page1
+https://example.com/page2 | https://your-site.com/page2"></textarea>
+                <div class="modal-hint">
+                    每行一组，两个URL用 <code>|</code> 或 <code>-</code> 分隔
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn" onclick="closeImportModal()">取消</button>
+                <button class="btn-primary" onclick="doImport()">导入</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Hidden file input -->
+    <input type="file" id="fileInput" accept=".md,.txt,.csv" onchange="handleFileImport(event)">
 
     <script>
         let data = [];
         let idx = 0;
-
-        async function loadData() {
-            try {
-                const resp = await fetch('/result.md?t=' + Date.now());
-                const text = await resp.text();
-                data = text.split(/\r?\n/).filter(l => l.trim()).map(parseLine).filter(Boolean);
-                document.getElementById('loading').classList.add('hidden');
-                renderSidebar();
-                render();
-            } catch (e) {
-                document.querySelector('.loading-text').textContent = '加载失败: ' + e.message;
-            }
-        }
+        const STORAGE_KEY = 'split-check-data';
 
         function parseLine(line) {
-            const tm = line.match(/^\[(.+?)\]/);
-            const time = tm ? tm[1] : '';
-            const rest = line.slice(line.indexOf(']') + 2);
-            const pi = rest.indexOf(' | ');
-            if (pi === -1) return null;
+            line = line.trim();
+            if (!line) return null;
 
-            let src = rest.slice(0, pi).trim();
-            let dstRaw = rest.slice(pi + 3).trim();
+            // 尝试提取时间戳 [xxx]
+            let time = '';
+            const tm = line.match(/^\[(.+?)\]\s*/);
+            if (tm) {
+                time = tm[1];
+                line = line.slice(tm[0].length);
+            }
+
+            // 用 | 或 - 分隔两个URL（优先匹配 |）
+            let parts = null;
+            // 尝试 " | " 分隔
+            if (line.includes(' | ')) {
+                parts = line.split(' | ');
+            }
+            // 尝试 " - " 分隔（确保不是URL内部的-）
+            else if (line.match(/https?:\/\/\S+\s+-\s+https?:\/\//)) {
+                const m = line.match(/^(https?:\/\/\S+)\s+-\s+(.*)/)
+                if (m) parts = [m[1], m[2]];
+            }
+
+            if (!parts || parts.length < 2) return null;
+
+            let src = parts[0].trim();
+            let dstRaw = parts.slice(1).join(' | ').trim();
             let dst = dstRaw, note = '';
 
+            // 提取复刻URL后面的中文备注
             const m = dstRaw.match(/^(https?:\/\/\S+)\s*([\u4e00-\u9fff].+)?$/);
             if (m) { dst = m[1]; note = m[2] || ''; }
             else if (!dstRaw.startsWith('http')) { dst = ''; }
 
+            if (!src.startsWith('http')) return null;
+
             return { time, src, dst, note };
+        }
+
+        function parseText(text) {
+            return text.split(/\r?\n/).filter(l => l.trim()).map(parseLine).filter(Boolean);
+        }
+
+        // ---- Storage ----
+        function saveToStorage() {
+            try { localStorage.setItem(STORAGE_KEY, JSON.stringify(data)); } catch (e) { }
+        }
+
+        function loadFromStorage() {
+            try {
+                const raw = localStorage.getItem(STORAGE_KEY);
+                if (raw) {
+                    const parsed = JSON.parse(raw);
+                    if (Array.isArray(parsed) && parsed.length > 0) {
+                        data = parsed;
+                        idx = 0;
+                        activateUI();
+                        renderSidebar();
+                        render();
+                    }
+                }
+            } catch (e) { }
         }
 
         function proxyUrl(u) {
             return '/proxy?url=' + encodeURIComponent(u);
         }
 
+        // ---- Import ----
+        function openImportModal() {
+            document.getElementById('importModal').classList.add('open');
+            document.getElementById('importTextarea').focus();
+            // Close sidebar if open
+            document.getElementById('sidebar').classList.remove('open');
+            document.getElementById('overlay').classList.remove('open');
+        }
+
+        function closeImportModal() {
+            document.getElementById('importModal').classList.remove('open');
+        }
+
+        function doImport() {
+            const text = document.getElementById('importTextarea').value.trim();
+            if (!text) return;
+            const parsed = parseText(text);
+            if (parsed.length === 0) {
+                alert('未解析到有效数据，请检查格式');
+                return;
+            }
+            data = parsed;
+            idx = 0;
+            closeImportModal();
+            saveToStorage();
+            activateUI();
+            renderSidebar();
+            render();
+        }
+
+        function triggerFileImport() {
+            document.getElementById('fileInput').click();
+        }
+
+        function handleFileImport(e) {
+            const file = e.target.files[0];
+            if (!file) return;
+            const reader = new FileReader();
+            reader.onload = function (ev) {
+                const text = ev.target.result;
+                const parsed = parseText(text);
+                if (parsed.length === 0) {
+                    alert('未解析到有效数据，请检查文件格式');
+                    return;
+                }
+                data = parsed;
+                idx = 0;
+                saveToStorage();
+                activateUI();
+                renderSidebar();
+                render();
+                // Close sidebar
+                document.getElementById('sidebar').classList.remove('open');
+                document.getElementById('overlay').classList.remove('open');
+            };
+            reader.readAsText(file, 'utf-8');
+            // Reset so same file can be re-imported
+            e.target.value = '';
+        }
+
+        function clearData() {
+            if (!confirm('确定要清空当前数据吗？')) return;
+            data = [];
+            idx = 0;
+            localStorage.removeItem(STORAGE_KEY);
+            deactivateUI();
+            renderSidebar();
+        }
+
+        // ---- UI State ----
+        function activateUI() {
+            document.getElementById('welcome').classList.add('hidden');
+            document.getElementById('compareArea').style.display = 'flex';
+            document.getElementById('urlBar').style.display = 'flex';
+            document.getElementById('navGroup').style.display = 'flex';
+            document.getElementById('kbdHints').style.display = 'flex';
+            document.getElementById('clearBtn').style.display = '';
+            document.getElementById('sbEmpty').style.display = 'none';
+        }
+
+        function deactivateUI() {
+            document.getElementById('welcome').classList.remove('hidden');
+            document.getElementById('compareArea').style.display = 'none';
+            document.getElementById('urlBar').style.display = 'none';
+            document.getElementById('navGroup').style.display = 'none';
+            document.getElementById('kbdHints').style.display = 'none';
+            document.getElementById('clearBtn').style.display = 'none';
+            document.getElementById('sbEmpty').style.display = '';
+            document.getElementById('srcFrame').src = 'about:blank';
+            document.getElementById('dstFrame').src = 'about:blank';
+        }
+
+        // ---- Navigation ----
         function go(dir) {
             const n = idx + dir;
             if (n < 0 || n >= data.length) return;
@@ -612,9 +1014,19 @@
             document.getElementById('nextBtn').disabled = idx >= data.length - 1;
         }
 
+        // ---- Sidebar ----
         function renderSidebar() {
             const list = document.getElementById('sbList');
-            list.innerHTML = '';
+            const emptyEl = document.getElementById('sbEmpty');
+            // Remove all items except sbEmpty
+            list.querySelectorAll('.sb-item').forEach(el => el.remove());
+
+            if (data.length === 0) {
+                emptyEl.style.display = '';
+                return;
+            }
+            emptyEl.style.display = 'none';
+
             data.forEach((item, i) => {
                 const div = document.createElement('div');
                 div.className = 'sb-item' + (i === idx ? ' active' : '');
@@ -636,13 +1048,17 @@
             document.getElementById('overlay').classList.toggle('open');
         }
 
+        // ---- Keyboard ----
         document.addEventListener('keydown', e => {
+            // Don't capture when typing in textarea
+            if (e.target.tagName === 'TEXTAREA' || e.target.tagName === 'INPUT') return;
             if (e.key === 'ArrowLeft') { go(-1); e.preventDefault(); }
             if (e.key === 'ArrowRight') { go(1); e.preventDefault(); }
             if (e.key === 'l' || e.key === 'L') { toggleSidebar(); e.preventDefault(); }
         });
 
-        loadData();
+        // Restore the last imported list after a refresh.
+        loadFromStorage();
     </script>
 </body>
 
