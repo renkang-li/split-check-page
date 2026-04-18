@@ -5,7 +5,7 @@ const path = require('path');
 const url = require('url');
 const { URL } = require('url');
 
-const PORT = 8080;
+const PORT = Number(process.env.PORT) || 8155;
 
 const MIME = {
   '.html': 'text/html; charset=utf-8',

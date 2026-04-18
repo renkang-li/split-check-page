@@ -1,0 +1,9 @@
+services:
+  split-check-page:
+    build: .
+    container_name: split-check-page
+    ports:
+      - "8155:8155"
+    environment:
+      PORT: 8155
+    restart: unless-stopped
