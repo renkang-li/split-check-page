@@ -1,6 +1,8 @@
 let data = [];
 let idx = 0;
 const STORAGE_KEY = 'split-check-data';
+const PREVIEW_MODE_KEY = 'split-check-preview-mode';
+let previewMode = 'mobile';
 
 function parseLine(line) {
     line = line.trim();
@@ -77,6 +79,51 @@ function loadFromStorage() {
     } catch (error) {
         // Ignore malformed storage and fall back to empty state.
     }
+}
+
+function savePreviewMode() {
+    try {
+        localStorage.setItem(PREVIEW_MODE_KEY, previewMode);
+    } catch (error) {
+        // Ignore storage failures and keep the current in-memory mode.
+    }
+}
+
+function updatePreviewModeButtons() {
+    const mobileBtn = document.getElementById('mobileModeBtn');
+    const desktopBtn = document.getElementById('desktopModeBtn');
+    const isDesktop = previewMode === 'desktop';
+
+    mobileBtn.classList.toggle('active', !isDesktop);
+    desktopBtn.classList.toggle('active', isDesktop);
+    mobileBtn.setAttribute('aria-pressed', String(!isDesktop));
+    desktopBtn.setAttribute('aria-pressed', String(isDesktop));
+}
+
+function setPreviewMode(mode) {
+    if (mode !== 'mobile' && mode !== 'desktop') {
+        return;
+    }
+
+    previewMode = mode;
+    document.body.classList.toggle('preview-desktop', previewMode === 'desktop');
+    updatePreviewModeButtons();
+    savePreviewMode();
+}
+
+function loadPreviewMode() {
+    let nextMode = 'mobile';
+
+    try {
+        const stored = localStorage.getItem(PREVIEW_MODE_KEY);
+        if (stored === 'mobile' || stored === 'desktop') {
+            nextMode = stored;
+        }
+    } catch (error) {
+        // Ignore storage failures and use the default mobile mode.
+    }
+
+    setPreviewMode(nextMode);
 }
 
 function proxyUrl(url) {
@@ -293,5 +340,7 @@ window.toggleSidebar = toggleSidebar;
 window.triggerFileImport = triggerFileImport;
 window.handleFileImport = handleFileImport;
 window.clearData = clearData;
+window.setPreviewMode = setPreviewMode;
 
+loadPreviewMode();
 loadFromStorage();

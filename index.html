@@ -19,6 +19,10 @@
             <div class="counter"><span class="cur" id="curNum">0</span> / <span id="totalNum">0</span></div>
             <button class="btn" id="nextBtn" onclick="go(1)">下一组 ▶</button>
         </div>
+        <div class="preview-switch" aria-label="预览模式切换">
+            <button class="btn preview-btn active" id="mobileModeBtn" onclick="setPreviewMode('mobile')">移动端</button>
+            <button class="btn preview-btn" id="desktopModeBtn" onclick="setPreviewMode('desktop')">PC端</button>
+        </div>
         <div class="spacer"></div>
         <div class="kbd-hints" id="kbdHints" style="display:none">
             <span><kbd>←</kbd> <kbd>→</kbd> 切换</span>
