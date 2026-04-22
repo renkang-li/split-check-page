@@ -114,10 +114,12 @@
             </div>
             <div class="modal-body">
                 <label>将对比数据粘贴到下方：</label>
-                <textarea id="importTextarea" placeholder="https://example.com/page1 | https://your-site.com/page1
+                <textarea id="importTextarea" placeholder="源站URL | 复刻站URL
+https://example.com/page1 | https://your-site.com/page1
 https://example.com/page2 | https://your-site.com/page2"></textarea>
                 <div class="modal-hint">
-                    每行一组，两个URL用 <code>|</code> 或 <code>-</code> 分隔
+                    每行一组，格式：<code>源站URL</code> <code>|</code> <code>复刻站URL</code>（用 <code>|</code> 或 <code>-</code> 分隔）<br>
+                    ⚠️ 注意顺序：左边为<strong>源站</strong>（原站），右边为<strong>复刻站</strong>，不可颠倒（源站有转发机制）
                 </div>
             </div>
             <div class="modal-footer">

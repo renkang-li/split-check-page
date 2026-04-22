@@ -17,8 +17,14 @@ function parseLine(line) {
 
     let parts = null;
     if (line.includes(' | ')) {
+        // 带空格的 | 分隔：源站URL | 复刻URL
         parts = line.split(' | ');
+    } else if (line.match(/\|https?:\/\//)) {
+        // 不带空格的 | 分隔：源站URL|复刻URL（| 后紧跟 http 才视为分隔符）
+        const splitIdx = line.indexOf('|http');
+        parts = [line.slice(0, splitIdx), line.slice(splitIdx + 1)];
     } else if (line.match(/https?:\/\/\S+\s+-\s+https?:\/\//)) {
+        // 带空格的 - 分隔：源站URL - 复刻URL
         const match = line.match(/^(https?:\/\/\S+)\s+-\s+(.*)/);
         if (match) {
             parts = [match[1], match[2]];
