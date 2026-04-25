@@ -50,49 +50,28 @@ function PreviewPane({ frameTitle, iframeUrl, displayUrl, isDesktop, label, tone
   return (
     <article className="preview-pane">
       <div className={`preview-shell${isDesktop ? ' preview-shell-desktop' : ''}`}>
-        {isDesktop ? (
-          <div className="desktop-shell-topbar">
-            {displayUrl ? (
-              <div className="mac-buttons">
-                <span />
-                <span />
-                <span />
-              </div>
-            ) : <div className="mac-spacer" />}
-            {displayUrl && (
-              <div className="browser-address-bar">
-                <span className={`inline-badge inline-badge-${tone}`}>{label}</span>
-                <Lock size={12} className="address-icon" />
-                <a href={displayUrl} target="_blank" rel="noreferrer" className="address-text">
-                  {displayUrl}
-                </a>
-                <a href={displayUrl} target="_blank" rel="noreferrer" className="address-external" title="在新标签页打开">
-                  <ExternalLink size={12} />
-                </a>
-              </div>
-            )}
-            <div className="mac-spacer" />
-          </div>
-        ) : (
-          <>
-            <div className="phone-notch">
-              <span className={`notch-badge notch-badge-${tone}`}>{label}</span>
+        <div className="desktop-shell-topbar">
+          {displayUrl && isDesktop ? (
+            <div className="mac-buttons">
+              <span />
+              <span />
+              <span />
             </div>
-            {displayUrl && (
-              <div className="mobile-safari-bar">
-                <div className="safari-address-box">
-                  <Lock size={10} className="address-icon" />
-                  <a href={displayUrl} target="_blank" rel="noreferrer" className="address-text">
-                    {displayUrl}
-                  </a>
-                </div>
-              </div>
-            )}
-            <div className="phone-home">
-              <div className="phone-home-bar" />
+          ) : <div className="mac-spacer" />}
+          {displayUrl && (
+            <div className="browser-address-bar">
+              <span className={`inline-badge inline-badge-${tone}`}>{label}</span>
+              <Lock size={12} className="address-icon" />
+              <a href={displayUrl} target="_blank" rel="noreferrer" className="address-text">
+                {displayUrl}
+              </a>
+              <a href={displayUrl} target="_blank" rel="noreferrer" className="address-external" title="在新标签页打开">
+                <ExternalLink size={12} />
+              </a>
             </div>
-          </>
-        )}
+          )}
+          <div className="mac-spacer" />
+        </div>
         <iframe title={frameTitle} src={iframeUrl} />
       </div>
     </article>
