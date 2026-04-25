@@ -6,4 +6,5 @@ services:
       - "8155:8155"
     environment:
       PORT: 8155
+      FRONTEND_DIST: frontend/dist
     restart: unless-stopped

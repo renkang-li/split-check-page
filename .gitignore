@@ -1,5 +1,2 @@
-.git
-.gitignore
 frontend/node_modules
 frontend/dist
-**/npm-debug.log
