@@ -1,3 +1,4 @@
+import { ExternalLink, Lock } from 'lucide-react'
 import type { CompareEntry, PreviewMode } from '../types'
 
 interface CompareAreaProps {
@@ -21,6 +22,7 @@ export function CompareArea({ entry, previewMode }: CompareAreaProps) {
         tone="src"
         frameTitle={isDesktop ? '源站桌面预览' : '源站移动预览'}
         iframeUrl={sourceUrl}
+        displayUrl={entry.src}
         isDesktop={isDesktop}
       />
       <PreviewPane
@@ -28,6 +30,7 @@ export function CompareArea({ entry, previewMode }: CompareAreaProps) {
         tone="dst"
         frameTitle={isDesktop ? '复刻桌面预览' : '复刻移动预览'}
         iframeUrl={targetUrl}
+        displayUrl={entry.dst || ''}
         isDesktop={isDesktop}
       />
     </section>
@@ -37,25 +40,54 @@ export function CompareArea({ entry, previewMode }: CompareAreaProps) {
 interface PreviewPaneProps {
   frameTitle: string
   iframeUrl: string
+  displayUrl: string
   isDesktop: boolean
   label: string
   tone: 'src' | 'dst'
 }
 
-function PreviewPane({ frameTitle, iframeUrl, isDesktop, label, tone }: PreviewPaneProps) {
+function PreviewPane({ frameTitle, iframeUrl, displayUrl, isDesktop, label, tone }: PreviewPaneProps) {
   return (
     <article className="preview-pane">
-      <div className={`preview-pane-title preview-pane-title-${tone}`}>{label}</div>
       <div className={`preview-shell${isDesktop ? ' preview-shell-desktop' : ''}`}>
         {isDesktop ? (
           <div className="desktop-shell-topbar">
-            <span />
-            <span />
-            <span />
+            {displayUrl ? (
+              <div className="mac-buttons">
+                <span />
+                <span />
+                <span />
+              </div>
+            ) : <div className="mac-spacer" />}
+            {displayUrl && (
+              <div className="browser-address-bar">
+                <span className={`inline-badge inline-badge-${tone}`}>{label}</span>
+                <Lock size={12} className="address-icon" />
+                <a href={displayUrl} target="_blank" rel="noreferrer" className="address-text">
+                  {displayUrl}
+                </a>
+                <a href={displayUrl} target="_blank" rel="noreferrer" className="address-external" title="在新标签页打开">
+                  <ExternalLink size={12} />
+                </a>
+              </div>
+            )}
+            <div className="mac-spacer" />
           </div>
         ) : (
           <>
-            <div className="phone-notch" />
+            <div className="phone-notch">
+              <span className={`notch-badge notch-badge-${tone}`}>{label}</span>
+            </div>
+            {displayUrl && (
+              <div className="mobile-safari-bar">
+                <div className="safari-address-box">
+                  <Lock size={10} className="address-icon" />
+                  <a href={displayUrl} target="_blank" rel="noreferrer" className="address-text">
+                    {displayUrl}
+                  </a>
+                </div>
+              </div>
+            )}
             <div className="phone-home">
               <div className="phone-home-bar" />
             </div>
@@ -66,3 +98,4 @@ function PreviewPane({ frameTitle, iframeUrl, isDesktop, label, tone }: PreviewP
     </article>
   )
 }
+

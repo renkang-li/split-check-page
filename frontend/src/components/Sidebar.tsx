@@ -9,7 +9,6 @@ interface SidebarProps {
   onClose: () => void
   onFileImport: () => void
   onJumpTo: (index: number) => void
-  onToggle: () => void
   onPasteImport: () => void
 }
 
@@ -21,7 +20,6 @@ export function Sidebar({
   onClose,
   onFileImport,
   onJumpTo,
-  onToggle,
   onPasteImport,
 }: SidebarProps) {
   return (
@@ -92,10 +90,6 @@ export function Sidebar({
           </div>
         )}
       </aside>
-
-      <button type="button" className="fab" onClick={onToggle}>
-        清单
-      </button>
     </>
   )
 }

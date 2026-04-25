@@ -33,7 +33,6 @@ export function UrlBar({ entry, currentIndex }: UrlBarProps) {
 
       <div className="meta-strip">
         <span className="meta-chip">#{currentIndex + 1}</span>
-        {entry.time ? <span className="meta-chip">{entry.time}</span> : null}
         {entry.note ? <span className="meta-note">{entry.note}</span> : null}
       </div>
     </section>

@@ -4,7 +4,6 @@ import { CompareArea } from './components/CompareArea'
 import { Header } from './components/Header'
 import { ImportModal } from './components/ImportModal'
 import { Sidebar } from './components/Sidebar'
-import { UrlBar } from './components/UrlBar'
 import { WelcomeScreen } from './components/WelcomeScreen'
 import { parseText } from './lib/parse'
 import { readStorage, removeStorage, writeStorage } from './lib/storage'
@@ -164,7 +163,12 @@ function App() {
       <main className="app-main">
         {currentEntry ? (
           <>
-            <UrlBar entry={currentEntry} currentIndex={activeIndex} />
+            {currentEntry.note && (
+              <div className="global-note-banner">
+                <span className="note-badge">备注</span>
+                <span className="note-text">{currentEntry.note}</span>
+              </div>
+            )}
             <CompareArea entry={currentEntry} previewMode={previewMode} />
           </>
         ) : (
@@ -180,7 +184,6 @@ function App() {
         onClose={() => setIsSidebarOpen(false)}
         onFileImport={triggerFileImport}
         onJumpTo={jumpTo}
-        onToggle={() => setIsSidebarOpen((value) => !value)}
         onPasteImport={openImportModal}
       />
 
