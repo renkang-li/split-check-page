@@ -25,7 +25,10 @@ export function WelcomeScreen({ onFileImport, onPasteImport }: WelcomeScreenProp
             <span>文件导入</span>
           </button>
         </div>
-        <p className="welcome-format">支持格式：`[时间] 源站URL | 复刻URL`</p>
+        <p className="welcome-format">
+          支持格式：`[时间] 源站URL | 复刻URL`
+          <span style={{ opacity: 0.5, fontSize: '12px', marginLeft: '6px', fontWeight: 'normal' }}>（*时间为选填项）</span>
+        </p>
       </div>
     </section>
   )

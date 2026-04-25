@@ -1,4 +1,4 @@
-import { ChevronLeft, ChevronRight, List, Monitor, Smartphone } from 'lucide-react'
+import { ChevronLeft, ChevronRight, Layers, List, Monitor, Smartphone } from 'lucide-react'
 import type { PreviewMode } from '../types'
 
 interface HeaderProps {
@@ -25,8 +25,8 @@ export function Header({
   return (
     <header className="header">
       <div className="header-left">
-        <div className="brand" title="Split Check 页面对比工作台">
-          <div className="brand-mark">SC</div>
+        <div className="brand">
+          <Layers size={22} className="brand-icon" />
           <div className="brand-text">Split Check</div>
         </div>
 

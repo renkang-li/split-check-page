@@ -132,19 +132,10 @@ a {
   min-width: 0;
 }
 
-.brand-mark {
-  width: 42px;
-  height: 42px;
-  border-radius: var(--radius-md);
-  display: grid;
-  place-items: center;
-  background: linear-gradient(135deg, rgba(51, 195, 161, 0.2), rgba(33, 150, 243, 0.2));
-  border: 1px solid rgba(255, 255, 255, 0.15);
-  box-shadow: var(--shadow-glow);
-  color: #fff;
-  font-size: 16px;
-  font-weight: 800;
-  letter-spacing: -0.5px;
+.brand-icon {
+  color: var(--accent-1);
+  filter: drop-shadow(0 0 8px rgba(51, 195, 161, 0.4));
+  flex-shrink: 0;
 }
 
 .brand-title,
@@ -602,6 +593,11 @@ kbd {
   border-radius: 4px;
   text-transform: uppercase;
   margin-right: 2px;
+  white-space: nowrap;
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .inline-badge-src {
@@ -622,6 +618,7 @@ kbd {
   display: block;
   text-align: center;
   margin-top: 3px;
+  white-space: nowrap;
 }
 
 .notch-badge-src {
