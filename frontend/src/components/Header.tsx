@@ -59,7 +59,7 @@ export function Header({
           <div className="nav-group">
             <button
               type="button"
-              className="btn"
+              className="btn btn-ghost"
               onClick={onPrevious}
               disabled={currentIndex <= 0}
               title="上一组"
@@ -74,7 +74,7 @@ export function Header({
             </div>
             <button
               type="button"
-              className="btn"
+              className="btn btn-ghost"
               onClick={onNext}
               disabled={currentIndex >= total - 1}
               title="下一组"

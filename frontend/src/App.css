@@ -233,8 +233,7 @@ a {
 .preview-switch {
   display: flex;
   align-items: center;
-  background: var(--surface-base);
-  border: 1px solid var(--border);
+  background: rgba(255, 255, 255, 0.03);
   border-radius: var(--radius-full);
   padding: 4px;
   gap: 4px;
